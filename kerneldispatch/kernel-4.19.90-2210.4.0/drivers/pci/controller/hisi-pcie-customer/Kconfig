@@ -1,3 +1,0 @@
-config HISILICON_PCIE_CAE
-	tristate "hisi custom pcie driver for hiarmtool"
-	default m

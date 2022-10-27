@@ -1,0 +1,17 @@
+#
+# USB Monitor configuration
+#
+
+config USB_MON
+	bool "USB Monitor"
+	depends on USB!=n
+	default y
+	help
+	  If you say Y here, a component which captures the USB traffic
+	  between peripheral-specific drivers and HC drivers will be built.
+	  The USB_MON is similar in spirit and may be compatible with Dave
+	  Harding's USBMon.
+
+	  This is somewhat experimental at this time, but it should be safe,
+	  as long as you aren't using modular USB and try to remove this
+	  module.
