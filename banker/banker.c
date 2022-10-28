@@ -17,11 +17,9 @@ int main()
 	printf("请输入资源数r\n");
 	scanf("%d",&r);
 	printf("请分别输入每个资源的总个数r[]\n");
-	for(int i=0;i<r;i++)
-		scanf("%d",&R[i]);
+	for(int i=0;i<r;i++) scanf("%d",&R[i]);
 	printf("请分别输入每个资源的可用个数v[]\n");
-	for(int i=0;i<r;i++)
-		scanf("%d",&v[i]);
+	for(int i=0;i<r;i++) scanf("%d",&v[i]);
 	printf("请输入每个进程对资源的最大需求矩阵c[][]\n");
 	for(int i=0;i<p;i++)
 		for(int j=0;j<r;j++)
@@ -35,7 +33,7 @@ int main()
 void menu()
 {
 	int op;
-	printf("请输入操作：1.请求资源 2.显示状态 3.退出\n");
+	printf("请输入操作: 1.请求分配资源 2.显示当前状态 3.退出\n");
 	scanf("%d",&op);
 	if(op==1) {bank();menu();}
 	else if(op==2) {prin();menu();}
@@ -46,7 +44,7 @@ void bank()  // allocate resource
 {
 	int num;
 	int bank[max];
-	printf("请输入分配的进程\n");
+	printf("请输入需要分配的进程\n");
 	scanf("%d",&num);
 	printf("请分别输入分配的资源数目\n"); 
 	for(int i=0;i<r;i++)
