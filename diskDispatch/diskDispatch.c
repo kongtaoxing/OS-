@@ -121,8 +121,74 @@ void CSCAN() {  //循环式单向电梯调度算法
 }
 
 void FSCAN() {  // 双队列电梯调度算法
-	int c = 0, b = begin;
+    int c = 0, b = begin, flag = 0;
+    for (int i = 0; i < num; i++) //SSTF时re[]已改变
+        re[i] = request[i];
 	printf("\n双队列电梯调度（FSCAN）算法：\n    访问顺序：      %3d", begin);
+    for (int i = 0; i < num - 1; i++) {
+        for (int j = 0; j < num - i - 1; j++) {
+            if (re[j] > re[j + 1]) {
+                re[j] = re[j] + re[j + 1];
+                re[j + 1] = re[j] - re[j + 1];
+                re[j] = re[j] - re[j + 1];
+            }
+        }
+    }
+    for (int i = 0; i < num; i++)
+        if (re[i] > b) {
+            printf(" %3d", re[i]);
+            r[c++] = re[i];
+        }
+    for (int i = num - 1; i >= 0; i--)
+        if (re[i] < b) {
+            printf(" %3d", re[i]);
+            flag = re[i];
+            r[c++] = re[i];
+        }
+    b = flag;
+    cross = abs(begin - r[0]);
+    printf("\n    横跨磁道数为：      %3d", abs(begin - r[0]));
+    for (int i = 1; i < num; i++) {
+        k = abs(r[i - 1] - r[i]);
+        printf(" %3d", k);
+        cross += k;
+    }
+    printf("\n  扫描中新产生的队列： \r");
+    for(int i = 0; i < num; i++) {  // 在扫描中新产生的队列 
+        request[i] = rand() % 200;
+        printf("%3d ", request[i]);
+    }
+    printf("\n");
+    for (int i = 0; i < num; i++) //SSTF时re[]已改变
+        re[i] = request[i];
+	printf("\n扫描中新产生的队列：\n    访问顺序：      %3d", b);
+    for (int i = 0; i < num - 1; i++) {
+        for (int j = 0; j < num - i - 1; j++) {
+            if (re[j] > re[j + 1]) {
+                re[j] = re[j] + re[j + 1];
+                re[j + 1] = re[j] - re[j + 1];
+                re[j] = re[j] - re[j + 1];
+            }
+        }
+    }
+    for (int i = 0; i < num; i++)
+        if (re[i] > b) {
+            printf(" %3d", re[i]);
+            r[c++] = re[i];
+        }
+    for (int i = num - 1; i >= 0; i--)
+        if (re[i] < b) {
+            printf(" %3d", re[i]);
+            r[c++] = re[i];
+        }
+    printf("\n    横跨磁道数为：      %3d", abs(begin - r[0]));
+    for (int i = 1; i < num; i++) {
+        k = abs(r[i - 1] - r[i]);
+        printf(" %3d", k);
+        cross += k;
+    }
+    printf("\n    横跨的总磁道数：    %3d", cross);
+    printf("\n    平均寻道长度：      %.5f\n", 1.0 * cross / num);
 
 }
 
