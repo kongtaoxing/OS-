@@ -188,7 +188,7 @@ void FSCAN() {  // 双队列电梯调度算法
         cross += k;
     }
     printf("\n    横跨的总磁道数：    %3d", cross);
-    printf("\n    平均寻道长度：      %.5f\n", 1.0 * cross / num);
+    printf("\n    平均寻道长度：      %.5f\n", 1.0 * cross / (num * 2));
 
 }
 
